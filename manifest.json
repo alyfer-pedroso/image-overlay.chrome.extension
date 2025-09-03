@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Image Overlay",
+  "version": "1.0",
+  "description": "Adiciona overlay de imagem personalizável em qualquer página",
+  "permissions": ["activeTab", "storage"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Image Overlay"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}

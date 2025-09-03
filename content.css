@@ -1,0 +1,124 @@
+#image-overlay-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  z-index: 999999;
+  cursor: move;
+  user-select: none;
+  display: none;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+  border: 2px solid transparent;
+}
+
+#image-overlay-container:hover {
+  border-color: rgba(66, 133, 244, 0.6);
+}
+
+#image-overlay-container.frozen {
+  pointer-events: none;
+  border-color: transparent !important;
+  cursor: default;
+}
+
+#image-overlay-container.frozen:hover {
+  border-color: transparent;
+}
+
+#image-overlay-container.dragging {
+  transition: none;
+  border-color: rgba(66, 133, 244, 0.8);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+#image-overlay-container.resizing {
+  transition: none;
+  border-color: rgba(255, 152, 0, 0.8);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+#overlay-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 4px;
+  pointer-events: none;
+  display: block;
+}
+
+.resize-handles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+#image-overlay-container:hover .resize-handles,
+#image-overlay-container.dragging .resize-handles,
+#image-overlay-container.resizing .resize-handles {
+  pointer-events: auto;
+}
+
+#image-overlay-container.frozen .resize-handles {
+  pointer-events: none !important;
+}
+
+.resize-handle {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #4285f4;
+  border: 2px solid white;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: auto;
+}
+
+#image-overlay-container:hover .resize-handle,
+#image-overlay-container.dragging .resize-handle,
+#image-overlay-container.resizing .resize-handle {
+  opacity: 1;
+}
+
+.resize-handle.nw {
+  top: -6px;
+  left: -6px;
+  cursor: nw-resize;
+}
+
+.resize-handle.ne {
+  top: -6px;
+  right: -6px;
+  cursor: ne-resize;
+}
+
+.resize-handle.sw {
+  bottom: -6px;
+  left: -6px;
+  cursor: sw-resize;
+}
+
+.resize-handle.se {
+  bottom: -6px;
+  right: -6px;
+  cursor: se-resize;
+}
+
+#image-overlay-container:not(.dragging):not(.resizing) {
+  transition: all 0.3s ease;
+}
+
+#image-overlay-container.active {
+  display: block;
+}
+
+#image-overlay-container.frozen * {
+  pointer-events: none !important;
+  user-select: none !important;
+}

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      body {
+        width: 300px;
+        padding: 16px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #f5f5f5;
+        margin: 0;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .section {
+        background: white;
+        padding: 12px;
+        border-radius: 8px;
+        margin-bottom: 12px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .upload-area {
+        border: 2px dashed #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .upload-area:hover {
+        border-color: #4285f4;
+        background: #f8f9ff;
+      }
+
+      .upload-area.dragover {
+        border-color: #4285f4;
+        background: #e8f0fe;
+      }
+
+      #fileInput {
+        display: none;
+      }
+
+      .control-group {
+        margin: 8px 0;
+      }
+
+      .control-group label {
+        display: block;
+        font-size: 12px;
+        color: #666;
+        margin-bottom: 4px;
+        font-weight: 500;
+      }
+
+      input[type="range"] {
+        width: 100%;
+        margin: 4px 0;
+      }
+
+      .value-display {
+        font-size: 11px;
+        color: #888;
+        text-align: right;
+      }
+
+      .button-group {
+        display: flex;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      button {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+      }
+
+      .toggle-btn {
+        background: #4285f4;
+        color: white;
+      }
+
+      .toggle-btn:hover {
+        background: #3367d6;
+      }
+
+      .toggle-btn.active {
+        background: #34a853;
+      }
+
+      .freeze-btn {
+        background: #ff9800;
+        color: white;
+      }
+
+      .freeze-btn:hover {
+        background: #f57c00;
+      }
+
+      .freeze-btn.active {
+        background: #795548;
+      }
+
+      .reset-btn {
+        background: #dc3545;
+        color: white;
+      }
+
+      .reset-btn:hover {
+        background: #c82333;
+      }
+
+      .current-image {
+        max-width: 100%;
+        max-height: 60px;
+        border-radius: 4px;
+        margin-top: 8px;
+      }
+
+      .status {
+        font-size: 12px;
+        text-align: center;
+        margin-top: 8px;
+        padding: 6px;
+        border-radius: 4px;
+      }
+
+      .status.active {
+        background: #d4edda;
+        color: #155724;
+      }
+
+      .status.inactive {
+        background: #f8d7da;
+        color: #721c24;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h3>🖼️ Image Overlay</h3>
+    </div>
+
+    <div class="section">
+      <div class="upload-area" id="uploadArea">
+        <div>📁 Clique ou arraste uma imagem</div>
+        <div style="font-size: 11px; color: #888; margin-top: 4px">PNG, JPG, GIF, WEBP</div>
+      </div>
+      <input type="file" id="fileInput" accept="image/*" />
+      <div id="currentImageContainer" style="display: none">
+        <img id="currentImage" class="current-image" />
+      </div>
+    </div>
+
+    <div class="section" id="controls" style="display: none">
+      <div class="control-group">
+        <label>Opacidade</label>
+        <input type="range" id="opacitySlider" min="0" max="100" value="80" />
+        <div class="value-display" id="opacityValue">80%</div>
+      </div>
+
+      <div class="control-group">
+        <label>Tamanho</label>
+        <input type="range" id="sizeSlider" min="10" max="200" value="100" />
+        <div class="value-display" id="sizeValue">100%</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="button-group">
+        <button class="toggle-btn" id="toggleBtn">Ativar</button>
+        <button class="freeze-btn" id="freezeBtn">Congelar</button>
+      </div>
+      <div class="button-group">
+        <button class="reset-btn" id="resetBtn">Resetar Posição</button>
+      </div>
+      <div class="status inactive" id="status">Overlay Desativado</div>
+      <div class="status inactive" id="connectionStatus" style="display: none">⚠️ Não disponível nesta página</div>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
