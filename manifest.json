@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Image Overlay",
   "version": "1.0",
-  "description": "Adiciona overlay de imagem personalizável em qualquer página",
+  "description": "Adiciona overlay de imagem personalizável (dimensões, posições, opacidade e visibilidade) em qualquer página",
   "permissions": ["activeTab", "storage"],
   "action": {
     "default_popup": "popup.html",
